@@ -5,7 +5,10 @@ class Game
     {
         GameEngine engine;
         engine = new GameEngine("My Game!");
+        PhysicsEngine physicsEngine = new PhysicsEngine();
         
+        engine.setPEngine(physicsEngine);
+
         GameSprite background = new GameSprite();
         background.addFrame("./data/background.png");
         engine.addSprite(background);
@@ -16,12 +19,14 @@ class Game
         //platform.setAnimated(false);
 
         engine.addSprite(platform);
-        
+        physicsEngine.addSceneElement(platform);        
         platform.posY+= 768-120;
         platform.physicsOn();
 
         Gunner s = new Gunner();
+
         s.addFrame("./data/gunner/gunner0.png");
+        physicsEngine.setGunner(s);
         s.addFrame("./data/gunner/gunner1.png");
         s.addFrame("./data/gunner/gunner2.png");
         s.addFrame("./data/gunner/gunner3.png");

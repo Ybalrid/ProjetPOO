@@ -4,6 +4,9 @@ import java.util.*;
 
 public class GameEngine extends JPanel
 {
+
+    private PhysicsEngine pEngine = null;
+
     private JFrame frame;
     
     private int w, h;
@@ -76,13 +79,26 @@ public class GameEngine extends JPanel
 
     public void stepPhysics()
     {
-
+        pEngine.simulationTime(milliToSec(System.currentTimeMillis() - start));
+        pEngine.step();
     }
 
     public void refresh() 
     {    
         stepPhysics();
         repaint();
+        //wait some time
+        try {
+            Thread.sleep(50);    
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
+
+    public void setPEngine(PhysicsEngine e)
+    {
+        pEngine = e;
+    }
+
 }
 

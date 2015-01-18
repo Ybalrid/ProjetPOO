@@ -6,13 +6,11 @@ import java.awt.image.*;
 public class Gunner extends GameSprite
 {
 
-    //speeds are in px/seconds:
-    int Xspeed = 0;
-    int Yspeed = 0;
-
     int hitboxX = 0;
     int hitboxY = 0;
-
+    
+    int hitboxPX = 0;
+    int hitboxPY = 0;
 
     public void fire()
     {
@@ -26,5 +24,13 @@ public class Gunner extends GameSprite
     {
     }
     
+    @Override
+    public void physicsOn()
+    {
+        BufferedImage baseSprite = (BufferedImage)getFrame();
+        hitboxX = baseSprite.getWidth();
+        hitboxY = baseSprite.getHeight();
 
+        System.out.println("Gunner hitbox dim: "+ hitboxX +"x"+hitboxY);
+    }
 }
