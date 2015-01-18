@@ -1,16 +1,9 @@
-import org.jbox2d.common.*;
-import org.jbox2d.dynamics.*;
-import org.jbox2d.collision.*;
-import org.jbox2d.collision.shapes.*;
 import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 
 public class GameEngine extends JPanel
 {
-    int pixelToMetterFactor = 100;
-    World world;
-    Vec2 gravity = new Vec2(0.0f, -9.81f);
     private JFrame frame;
     
     private int w, h;
@@ -28,7 +21,6 @@ public class GameEngine extends JPanel
         renderQueue = new ArrayList<GameSprite>();
         this.createWindow();
 
-        world = new World(gravity);
     }
 
     public float milliToSec(long milli)
@@ -57,8 +49,7 @@ public class GameEngine extends JPanel
     public void addSprite(GameSprite gs)
     {
         renderQueue.add(gs);
-        gs.setWorld(world);
-        gs.setGeometryInformation(pixelToMetterFactor,w,h);
+        gs.setGeometryInformation(w,h);
     }
 
     @Override
@@ -89,7 +80,7 @@ public class GameEngine extends JPanel
     }
 
     public void refresh() 
-   {    
+    {    
         stepPhysics();
         repaint();
     }

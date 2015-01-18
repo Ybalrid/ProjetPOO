@@ -1,7 +1,3 @@
-import org.jbox2d.common.*;
-import org.jbox2d.dynamics.*;
-import org.jbox2d.collision.*;
-import org.jbox2d.collision.shapes.*;
 
 class Game
 {
@@ -10,6 +6,10 @@ class Game
         GameEngine engine;
         engine = new GameEngine("My Game!");
         
+        GameSprite background = new GameSprite();
+        background.addFrame("./data/background.png");
+        engine.addSprite(background);
+
         SceneSprite platform = new SceneSprite();
 
         platform.addFrame("./data/PlatformTest.png");

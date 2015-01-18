@@ -4,10 +4,6 @@ import javax.swing.*;
 import javax.imageio.*;
 import java.io.*;
 import java.util.*;
-import org.jbox2d.common.*;
-import org.jbox2d.dynamics.*;
-import org.jbox2d.collision.*;
-import org.jbox2d.collision.shapes.*;
 
 public class GameSprite
 {
@@ -23,18 +19,13 @@ public class GameSprite
 
     int posX, posY;
     
-    //Refernce to the jbox2d
-    World gameWorld = null;
-    //factore between a jbox2d metter and pixels
-    int scaleFactor;
     //window dimention
     int winW, winH;
     
     boolean physicsOk = false;
 
-    public void setGeometryInformation(int scaling, int w, int h)
+    public void setGeometryInformation(int w, int h)
     {
-        scaleFactor = scaling;
         winW = w;
         winH = h;
     }
@@ -54,10 +45,6 @@ public class GameSprite
         posX = 0; posY = 0;
     }
 
-    public void setWorld(World world)
-    {
-        gameWorld = world;
-    }
 
     public void setAnimated(boolean anim)
     {
