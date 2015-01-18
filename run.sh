@@ -1,3 +1,5 @@
 #!/bin/bash
-java Game   
+xset r off
+java Game 
+xset r on
 

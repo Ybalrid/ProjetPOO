@@ -32,7 +32,7 @@ class Game
         s.addFrame("./data/gunner/gunner3.png");
         
         s.setFramerate(6);
-        s.setAnimated(true);
+//        s.setAnimated(true);
 
         engine.addSprite(s);
         s.physicsOn();

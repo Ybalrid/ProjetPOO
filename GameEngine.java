@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.util.*;
-
+import java.awt.event.KeyListener;
 public class GameEngine extends JPanel
 {
 
@@ -15,6 +15,7 @@ public class GameEngine extends JPanel
     
     long start;
 
+    GameInputListener listener = new GameInputListener();
     public GameEngine(String windowName)
     {
         start = System.currentTimeMillis();
@@ -23,7 +24,8 @@ public class GameEngine extends JPanel
         h = 768;
         renderQueue = new ArrayList<GameSprite>();
         this.createWindow();
-
+        addKeyListener(listener);
+            setFocusable(true);
     }
 
     public float milliToSec(long milli)
@@ -89,7 +91,7 @@ public class GameEngine extends JPanel
         repaint();
         //wait some time
         try {
-            Thread.sleep(50);    
+            Thread.sleep(5);    
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -98,6 +100,7 @@ public class GameEngine extends JPanel
     public void setPEngine(PhysicsEngine e)
     {
         pEngine = e;
+        listener.setPEngine(e);
     }
 
 }

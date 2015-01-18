@@ -14,15 +14,9 @@ public class Gunner extends GameSprite
 
     public void fire()
     {
+
     }
 
-    public void jump()
-    {
-    }
-
-    public void run()
-    {
-    }
     
     @Override
     public void physicsOn()

@@ -76,7 +76,6 @@ public class GameSprite
     {
         //System.out.println("New timecode : " +time);
         if(!animated) return;
-        
         lastTime = currentTime;
         currentTime = time;
 
