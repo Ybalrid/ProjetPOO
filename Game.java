@@ -33,6 +33,17 @@ class Game
         
         s.setFramerate(6);
 //        s.setAnimated(true);
+//
+//
+        BadGuy bg = new BadGuy();
+        bg.posX = 1024/2;
+        bg.posY = 768/2;
+        bg.addFrame("./data/badguy.png");
+        engine.addSprite(bg);
+        bg.physicsOn();
+        physicsEngine.addBadGuy(bg);
+
+
 
         engine.addSprite(s);
         s.physicsOn();

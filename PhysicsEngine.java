@@ -7,6 +7,8 @@ class PhysicsEngine
     private Gunner gunner = null;
     private ArrayList<SceneSprite> scene = null;
     private ArrayList<Bullet> bullets = null;   
+    private ArrayList<BadGuy> badGuys = null;
+
     float currentTime, lastTime, interFrameTime;
     float jumpTime, fireTime;
     private GameEngine gameEngine = null;
@@ -14,6 +16,7 @@ class PhysicsEngine
     {
         scene = new ArrayList<SceneSprite>();
         bullets = new ArrayList<Bullet>();
+        badGuys = new ArrayList<BadGuy>();
     }
     
     public void setGameEngine(GameEngine ge)
@@ -41,6 +44,17 @@ class PhysicsEngine
     public void addSceneElement(SceneSprite ss)
     {
         scene.add(ss);
+    }
+
+    public void addBadGuy(BadGuy bg)
+    {
+        badGuys.add(bg);
+    }
+
+
+    public void removeBadGuy(BadGuy bg)
+    {
+
     }
 
     public void simulationTime(float time)
@@ -86,6 +100,7 @@ class PhysicsEngine
     int fireRate = 500;
     public void step()
     {
+        stepBad();
         for(int i = 0; i < bullets.size(); i++)
         {
             System.out.println("Bullet #"+i);
@@ -211,6 +226,35 @@ class PhysicsEngine
         Bullet b = new Bullet(gunner.posX+gunner.hitboxX, gunner.posY+60);
         gameEngine.addSprite(b); 
         bullets.add(b);
+    }
+
+    private void stepBad()
+    {   
+        for(int i = 0; i < badGuys.size(); i++)
+        {
+            for(int j = 0; j < bullets.size(); j++)
+            {  
+                Bullet b = bullets.get(j);
+                BadGuy bg = badGuys.get(i);
+                    
+                if(b.posX + b.hitboxX >= bg.posX && b.posX <= bg.posX + bg.hitboxX)
+                {
+                    if(b.posY + b.hitboxY  >= bg.posY && b.posY  <= bg.posY + bg.hitboxY)
+                    {
+                        bullets.remove(b);
+                        gameEngine.removeSprite(b);
+
+                        bg.life--;
+                        if(bg.life <= 0)
+                        {
+                            badGuys.remove(bg);
+                            gameEngine.removeSprite(bg);
+                        }
+                        
+                    }
+                }
+            }
+        }
     }
 
 }

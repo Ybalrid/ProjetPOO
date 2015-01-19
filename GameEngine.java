@@ -14,7 +14,7 @@ public class GameEngine extends JPanel
     private ArrayList<GameSprite> renderQueue;
     
     long start;
-
+    
     GameInputListener listener = new GameInputListener();
     public GameEngine(String windowName)
     {
@@ -102,6 +102,11 @@ public class GameEngine extends JPanel
         e.setGameEngine(this);
         pEngine = e;
         listener.setPEngine(e);
+    }
+
+    public void removeSprite(GameSprite sprite)
+    {
+        renderQueue.remove(sprite);
     }
 
 }
