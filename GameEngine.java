@@ -99,6 +99,7 @@ public class GameEngine extends JPanel
 
     public void setPEngine(PhysicsEngine e)
     {
+        e.setGameEngine(this);
         pEngine = e;
         listener.setPEngine(e);
     }
