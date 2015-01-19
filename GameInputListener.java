@@ -30,15 +30,15 @@ public class GameInputListener implements KeyListener
 
 
         if(pEngine==null)return;
-        //        System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
+                System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
         //
         String key = KeyEvent.getKeyText(e.getKeyCode());
 
-        if(key.equals("Right"))
+        if(key.equals("Right")||key.equals("→"))
             pEngine.inputRight(true);
-        if(key.equals("Left"))
+        if(key.equals("Left")||key.equals("←"))
             pEngine.inputLeft(true);
-        if(key.equals("Space"))
+        if(key.equals("Space")||key.equals("␣"))
             pEngine.inputJump(true);
         if(key.equals("F"))
             pEngine.inputFire(true);
@@ -51,11 +51,11 @@ public class GameInputListener implements KeyListener
         if(!canRelease)return; 
         
         String key = KeyEvent.getKeyText(e.getKeyCode());
-        if(key.equals("Right"))
+        if(key.equals("Right") || key.equals("→"))
             pEngine.inputRight(false);
-        if(key.equals("Left"))
+        if(key.equals("Left")||key.equals("←"))
             pEngine.inputLeft(false);
-        if(key.equals("Space"))
+        if(key.equals("Space") || key.equals("␣"))
             pEngine.inputJump(false);
         if(key.equals("F"))
             pEngine.inputFire(false);
