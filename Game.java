@@ -1,28 +1,52 @@
-
-class Game
+public class Game
 {
+
+       public static GameEngine engine = new GameEngine("game");
+       public static  PhysicsEngine physicsEngine = new PhysicsEngine();
+    public static void addPlatform(int x, int y)
+    {
+     
+        SceneSprite platform = new SceneSprite();
+
+        platform.addFrame("./data/platform.png");
+        //platform.setAnimated(false);
+
+        engine.addSprite(platform);
+        physicsEngine.addSceneElement(platform);        
+        platform.posY = y ;
+        platform.posX = x ;
+        platform.physicsOn();
+    }
+
+    public static void addBadGuy(int x, int y)
+    {
+        BadGuy bg = new BadGuy();
+        bg.posX =x;
+        bg.posY = y;
+        bg.addFrame("./data/badguy.png");
+        engine.addSprite(bg);
+        bg.physicsOn();
+        physicsEngine.addBadGuy(bg);
+
+    }
+
     public static void main(String[] args)
     {
-        GameEngine engine;
-        engine = new GameEngine("My Game!");
-        PhysicsEngine physicsEngine = new PhysicsEngine();
+
         
         engine.setPEngine(physicsEngine);
 
         GameSprite background = new GameSprite();
         background.addFrame("./data/background.png");
         engine.addSprite(background);
+        
+        for(int i = 0; i < 5; i++)
+        {
+            addPlatform(i*133, 768-120);
+        }
 
-        SceneSprite platform = new SceneSprite();
 
-        platform.addFrame("./data/PlatformTest.png");
-        //platform.setAnimated(false);
-
-        engine.addSprite(platform);
-        physicsEngine.addSceneElement(platform);        
-        platform.posY+= 768-120;
-        platform.physicsOn();
-
+        addPlatform(200, 768-240);
         Gunner s = new Gunner();
 
         s.addFrame("./data/gunner/gunner0.png");
@@ -35,15 +59,16 @@ class Game
 //        s.setAnimated(true);
 //
 //
-        BadGuy bg = new BadGuy();
-        bg.posX = 1024/2;
-        bg.posY = 768/2;
-        bg.addFrame("./data/badguy.png");
-        engine.addSprite(bg);
-        bg.physicsOn();
-        physicsEngine.addBadGuy(bg);
+        addBadGuy(1024/2-20, 768/2);
+        addBadGuy(1024/4, 768/2);
+        
+        addPlatform(400, 768-240);
 
-
+        addPlatform(500, 768- 480);
+        addPlatform(700, 768 - 480);
+        
+        addBadGuy(550, 150);
+        addBadGuy(750, 150);
 
         engine.addSprite(s);
         s.physicsOn();

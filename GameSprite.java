@@ -11,7 +11,7 @@ public class GameSprite
     float fps;
     
     boolean animated;
-
+    boolean flipped = false;
     float currentTime;
     float lastTime;
     float timeSinceLastFrameChange;

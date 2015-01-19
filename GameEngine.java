@@ -2,9 +2,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 import java.awt.event.KeyListener;
+import javax.imageio.*;
+import java.awt.image.*;
 public class GameEngine extends JPanel
 {
-
+    
+    public String text = "Left/Right arrows to run.\nSpace to jump.\nF to fire";
+    Font f = new Font("font", Font.PLAIN, 20);
     private PhysicsEngine pEngine = null;
 
     private JFrame frame;
@@ -75,8 +79,17 @@ public class GameEngine extends JPanel
         {
             gs.update(milliToSec(System.currentTimeMillis() - start));
             gs.physicsRun();
-            g2.drawImage(gs.getFrame(), gs.posX, gs.posY, null);
+            if(!gs.flipped)
+                g2.drawImage(gs.getFrame(), gs.posX, gs.posY, null);
+            else
+            {
+                BufferedImage gsb =(BufferedImage) gs.getFrame();
+                g2.drawImage(gsb, gs.posX+gsb.getWidth(), gs.posY,- gsb.getWidth(), gsb.getHeight(), null);
+            }
         }
+        g2.setColor(Color.BLACK);
+        g2.setFont(f);
+        g2.drawString(text, 0, 20);
     }
 
     public void stepPhysics()

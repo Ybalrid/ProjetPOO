@@ -104,8 +104,18 @@ class PhysicsEngine
         for(int i = 0; i < bullets.size(); i++)
         {
             System.out.println("Bullet #"+i);
-            bullets.get(i).posX += 700*interFrameTime;
+            if(bullets.get(i).flipped)
+                bullets.get(i).posX +=- 700*interFrameTime;
+            else
+                bullets.get(i).posX += 700*interFrameTime;
             System.out.println(bullets.get(i).posX);
+
+            if(bullets.get(i).posX < 0 || bullets.get(i).posX > 1024)
+            {
+                Bullet destroyed = bullets.get(i);
+                bullets.remove(destroyed);
+                gameEngine.removeSprite(destroyed);
+            }
         }
 
   //      System.out.println("step");
@@ -147,6 +157,7 @@ class PhysicsEngine
             {
                 gunner.setAnimated(true);
                 gunner.posX += displacement;
+                gunner.left();
             }
         }
         else if(right)
@@ -166,6 +177,7 @@ class PhysicsEngine
             {
                 gunner.setAnimated(true);
                 gunner.posX += displacement;
+                gunner.right();
             }
 
         }
@@ -223,9 +235,23 @@ class PhysicsEngine
     private void doFire()
     {
         if(gameEngine == null) return;
-        Bullet b = new Bullet(gunner.posX+gunner.hitboxX, gunner.posY+60);
+        int x, y;
+
+        if(gunner.flipped)
+        {
+            x = gunner.posX;
+            y = gunner.posY + 20;
+        }
+
+        else
+        {
+            x = gunner.posX + gunner.hitboxX;
+            y = gunner.posY + 20;
+        }
+        Bullet b = new Bullet(x,y);
         gameEngine.addSprite(b); 
         bullets.add(b);
+        b.flipped = gunner.flipped;
     }
 
     private void stepBad()

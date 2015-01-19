@@ -11,13 +11,22 @@ public class Gunner extends GameSprite
     
     int hitboxPX = 0;
     int hitboxPY = 0;
+    
 
     public void fire()
     {
 
     }
 
-    
+    public void left()
+    {
+        flipped = true;
+    }
+
+    public void right()
+    {
+        flipped = false;
+    }
     @Override
     public void physicsOn()
     {

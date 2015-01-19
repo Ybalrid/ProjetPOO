@@ -8,7 +8,7 @@ public class Bullet extends GameSprite
 {
     int hitboxX = 0;
     int hitboxY = 0;
-
+    
     
     public Bullet(int x, int y)
     {
@@ -18,7 +18,7 @@ public class Bullet extends GameSprite
         posY = y;
     }
 
-
+    
     @Override
     public void physicsOn()
     {
